@@ -99,7 +99,7 @@ def app():
     text_input = st.text_input("Enter the Review to be Classified:")
 
     # Preprocess the input text
-    review = use(text_input)
+    review = use([text_input])
     review = np.array([tf.reshape(review, [-1]).numpy()])
 
     y_pred = model.predict(review)
@@ -107,6 +107,7 @@ def app():
 
     # Display the prediction
     st.write("The sentiment of the review given is:", y_pred)
+
 
 
 if __name__ == '__main__':
