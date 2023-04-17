@@ -97,16 +97,18 @@ def app():
     model = sentiment_analysis_of_review(df)
     # Create a text input for the user to input the text to be classified
     text_input = st.text_input("Enter the Review to be Classified:")
+    if text_imput.strip() == '':
+        st.write("")
+    else :
+        # Preprocess the input text
+        review = use([text_input])
+        review = np.array([tf.reshape(review, [-1]).numpy()])
 
-    # Preprocess the input text
-    review = use([text_input])
-    review = np.array([tf.reshape(review, [-1]).numpy()])
+        y_pred = model.predict(review)
+        y_pred = ["Bad" if np.argmax(i) == 0 else "Good" for i in y_pred][0]
 
-    y_pred = model.predict(review)
-    y_pred = ["Bad" if np.argmax(i) == 0 else "Good" for i in y_pred][0]
-
-    # Display the prediction
-    st.write("The sentiment of the review given is:", y_pred)
+        # Display the prediction
+        st.write("The sentiment of the review given is:", y_pred)
 
 
 if __name__ == '__main__':
