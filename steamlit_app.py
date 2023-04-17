@@ -8,10 +8,10 @@ from joblib import dump, load
 import os
 
 # Load the Iris dataset
+data = load_iris()
 if os.path.exists('iris_model.joblib'):
     clf = load('iris_model.joblib')
 else:
-    data = load_iris()
     X = pd.DataFrame(data.data, columns=data.feature_names)
     y = pd.Series(data.target, name='class')
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42, shuffle=True)
