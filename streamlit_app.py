@@ -93,9 +93,10 @@ def sentiment_analysis_of_review(df):
 # Define the Streamlit app
 def app():
     st.title("Hotel Review Sentiment Analysis")
-
+    st.subheader("Supports 92 languages")
     model = sentiment_analysis_of_review(df)
     # Create a text input for the user to input the text to be classified
+
     text_input = st.text_input("Enter the Review to be Classified:")
     if text_input.strip() == '':
         st.write("")
