@@ -5,3 +5,5 @@ tensorflow==2.7
 protobuf==3.20.*
 tensorflow_hub
 tensorflow-text==2.7
+tdqm
+openpyxl
