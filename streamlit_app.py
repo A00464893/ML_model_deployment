@@ -15,12 +15,13 @@ keras = tf.keras
 
 use = hub.load("https://tfhub.dev/google/universal-sentence-encoder-multilingual-large/3")
 
-df = pd.read_excel('hotel_review.xlsx')
-def sentiment_analysis_of_review(df):
+
+def sentiment_analysis_of_review():
     if os.path.exists('model.pkl'):
         model = keras.models.load_model('model.pkl')
         return model
     else:
+        df = pd.read_excel('hotel_review.xlsx')
         df["review"] = df["Negative_Review"].replace('No Negative', '') + ' ' + df["Positive_Review"].replace('No Positive',' ')
         df["review_type"] = df["Reviewer_Score"].apply(
             lambda x: "bad" if x < 6 else "good"
@@ -94,7 +95,7 @@ def sentiment_analysis_of_review(df):
 def app():
     st.title("Hotel Review Sentiment Analysis")
     st.subheader("Supports 92 languages")
-    model = sentiment_analysis_of_review(df)
+    model = sentiment_analysis_of_review()
     # Create a text input for the user to input the text to be classified
 
     text_input = st.text_input("Enter the Review to be Classified:")
